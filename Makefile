@@ -13,7 +13,7 @@ CFLAGS 	=	-g3 -Wall -Wextra -Werror -I./include
 CSFML 	=	-lcsfml-system -lcsfml-window -lcsfml-graphics -lcsfml-audio -lcsfml-network
 
 $(NAME):
-		@gcc -o $(NAME) $(SRC) $(CFLAGS) $(LFLAGS)
+		@gcc -o $(NAME) $(SRC) $(CSFML) $(CFLAGS)
 
 all:	$(NAME)
 
