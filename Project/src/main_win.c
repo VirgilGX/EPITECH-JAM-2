@@ -98,17 +98,13 @@ void move_skier_black(GAME_T *GAME)
     }
 }
 
-void condition_window(GAME_T *GAME)
+GAME_T *condition_window(GAME_T *GAME)
 {
-    /*sfVector2f posi = {sfMouse_getPositionRenderWindow(GAME->window).x,
-    sfMouse_getPositionRenderWindow(GAME->window).y};
-    printf("%f - %f\n", posi.x, posi.y);*/
     while (sfRenderWindow_pollEvent(GAME->window, &GAME->event)) {
         if (GAME->event.type == sfEvtKeyPressed &&
         GAME->event.key.code == sfKeyEscape) {
             sfRenderWindow_close(GAME->window);
-        }
-        if (GAME->event.type == sfEvtKeyPressed &&
+        } else if (GAME->event.type == sfEvtKeyPressed &&
         GAME->event.key.code == sfKeySpace) {
             GAME->boo++;
         }
@@ -117,18 +113,19 @@ void condition_window(GAME_T *GAME)
         else
             move_skier_black(GAME);
     }
+    return (GAME);
 }
 
 GAME_T *main_window(GAME_T *GAME_T)
 {
     while (sfRenderWindow_isOpen(GAME_T->window)) {
-        condition_window(GAME_T);
+        GAME_T = condition_window(GAME_T);
         sfRenderWindow_clear(GAME_T->window, sfBlack);
         draw_sprite(GAME_T);
         move_obstacle_white(GAME_T);
         move_obstacle_black(GAME_T);
-        if_colision_white(GAME_T);
         sfRenderWindow_display(GAME_T->window);
+        if_colision_white(GAME_T);
     }
     return (GAME_T);
 }

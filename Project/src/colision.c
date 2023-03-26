@@ -9,12 +9,12 @@
 
 void if_colision_white(GAME_T *GAME)
 {
-    int a = 110, b = 110;
-    if ((GAME->sprite_game->pos.x >= GAME->obs->pre.x) &&
-    (GAME->sprite_game->pos.x <= (GAME->obs->pre.x + a)) &&
-    (GAME->sprite_game->pos.y >= GAME->obs->pre.y) &&
-    (GAME->sprite_game->pos.y <= (GAME->obs->pre.y + b))) {
-        printf("%d\n", GAME->life);
+    int a = 100, b = 100;
+    if ((GAME->obs->pre.x >= GAME->sprite_game->pos.x) &&
+    (GAME->obs->pre.x <= (GAME->sprite_game->pos.x + a)) &&
+    (GAME->obs->pre.y >= GAME->sprite_game->pos.y) &&
+    (GAME->obs->pre.y <= (GAME->sprite_game->pos.y + b))) {
+        printf("touché : %d\n", GAME->life);
         GAME->life++;
     }
 }
