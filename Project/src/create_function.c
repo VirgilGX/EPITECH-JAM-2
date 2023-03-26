@@ -38,3 +38,23 @@ sfVector2f size)
 
     return (rectangle);
 }
+
+void movement_white(sfSprite *sprite, sfVector2f pos)
+{
+    int speed = 8;
+    pos.x = pos.x - speed;
+    sfVector2f posso = { pos.x, pos.y };
+    sfSprite_setPosition(sprite, posso);
+    if (pos.x == 0)
+        pos.x = 1920;
+}
+
+void movement_black(sfSprite *sprite, sfVector2f pos)
+{
+    int speed = 8;
+    pos.x = pos.x + speed;
+    sfVector2f posso = { pos.x, pos.y };
+    sfSprite_setPosition(sprite, posso);
+    if (pos.x == 1920)
+        pos.x = 0;
+}

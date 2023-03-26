@@ -11,6 +11,6 @@ int main(int ac, char **av)
 {
     (void)ac, (void)av;
     srand(time(0));
-    game_init(av);
+    menu(av);
     return (SUCCESS);
 }
