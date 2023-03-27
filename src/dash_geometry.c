@@ -10,6 +10,7 @@
 int main(int ac, char **av)
 {
     (void)ac, (void)av;
-    game_init(av);
+    srand(time(0));
+    menu(av);
     return (SUCCESS);
 }
