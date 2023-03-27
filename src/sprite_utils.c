@@ -68,6 +68,6 @@ OBS_2T *obns_sprite_black(void)
     obns->piece = create_sprite("./assets/sprite/obstacle/piece.png",
     obns->pie.x, obns->pie.y, 1.5);
     obns->illusion = create_sprite("./assets/sprite/illusion/optique2.png",
-    obns->illu.x, obns->illu.y, 1);
+    obns->illu.x, obns->illu.y, 0.7);
     return (obns);
 }

@@ -19,24 +19,14 @@ int game_init(char **args)
     G->sprite_game = set_sprite();
     G->obs = obs_sprite_white();
     G->obns = obns_sprite_black();
-    G->life = 3;
+    G->life = 0;
 
     int status = 0;
     G = main_window(G);
-    if (G->life == 1) {
-        sfRectangleShape_destroy(G->sprite_game->life);
-    } else if (G->life == 2) {
-        sfRectangleShape_destroy(G->sprite_game->life2);
-    } else if (G->life == 3) {
-        sfRectangleShape_destroy(G->sprite_game->life3);
-        free_sprite(G->sprite_game, G->obs, G->obns);
-        free(G);
-        status = 1;
-    } else {
-        free_sprite(G->sprite_game, G->obs, G->obns);
-        sfRenderWindow_destroy(G->window);
-        free(G);
-        status = 0;
-    }
+
+    free_sprite(G->sprite_game, G->obs, G->obns);
+    sfRenderWindow_destroy(G->window);
+    free(G);
+    status = 0;
     return (status);
 }

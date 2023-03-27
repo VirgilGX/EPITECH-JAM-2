@@ -9,7 +9,7 @@
 
 void move_obstacle_white(GAME_T *GAME)
 {
-    int speed = 20;
+    int speed = 10;
     GAME->obs->pre.x = GAME->obs->pre.x - speed;
     sfVector2f posso = { GAME->obs->pre.x, GAME->obs->pre.y };
     sfSprite_setPosition(GAME->obs->pierre, posso);
@@ -49,7 +49,7 @@ void move_obstacle_white(GAME_T *GAME)
 
 void move_obstacle_black(GAME_T *GAME)
 {
-    int speed = 15;
+    int speed = 10;
     GAME->obns->champ.x = GAME->obns->champ.x + speed;
     sfVector2f pos = { GAME->obns->champ.x, GAME->obns->champ.y };
     sfSprite_setPosition(GAME->obns->champi, pos);
@@ -78,19 +78,31 @@ void move_obstacle_black(GAME_T *GAME)
         GAME->obns->pie.x = -10;
         GAME->obns->pie.y = (rand() % 480);
     }
+    GAME->obns->illu.x = GAME->obns->illu.x + speed;
+    sfVector2f pos5 = { GAME->obns->illu.x, GAME->obns->illu.y };
+    sfSprite_setPosition(GAME->obns->illusion, pos5);
+    if (GAME->obns->illu.x >= 1920) {
+        GAME->obns->illu.x = -10;
+        GAME->obns->illu.y = (rand() % 480);
+    }
 }
 
 void move_skier_white(GAME_T *GAME)
 {
     int speed = 50;
     if (GAME->event.type == sfEvtKeyPressed && GAME->event.key.code == sfKeyUp) {
-        GAME->sprite_game->pos.y = GAME->sprite_game->pos.y - speed;
+        if (GAME->sprite_game->pos.y >= 405) {
+            GAME->sprite_game->pos.y = GAME->sprite_game->pos.y - speed;
+        }
         sfVector2f loco = { GAME->sprite_game->pos.x, GAME->sprite_game->pos.y };
         sfSprite_setPosition(GAME->sprite_game->ski_character, loco);
-    } else if (GAME->event.type == sfEvtKeyPressed && GAME->event.key.code == sfKeyDown) {
-        GAME->sprite_game->pos.y = GAME->sprite_game->pos.y + speed;
-        sfVector2f loco = { GAME->sprite_game->pos.x, GAME->sprite_game->pos.y };
-        sfSprite_setPosition(GAME->sprite_game->ski_character, loco);
+    }
+    if (GAME->event.type == sfEvtKeyPressed && GAME->event.key.code == sfKeyDown) {
+        if (GAME->sprite_game->pos.y <= 748) {
+            GAME->sprite_game->pos.y = GAME->sprite_game->pos.y + speed;
+            sfVector2f loco = { GAME->sprite_game->pos.x, GAME->sprite_game->pos.y };
+            sfSprite_setPosition(GAME->sprite_game->ski_character, loco);
+        }
     }
     if (GAME->event.type == sfEvtKeyPressed && GAME->event.key.code == sfKeyLeft) {
         GAME->sprite_game->pos.x = GAME->sprite_game->pos.x - speed;
@@ -106,15 +118,20 @@ void move_skier_white(GAME_T *GAME)
 
 void move_skier_black(GAME_T *GAME)
 {
-    int speed = 50;
+    int speed = 60;
     if (GAME->event.type == sfEvtKeyPressed && GAME->event.key.code == sfKeyUp) {
-        GAME->sprite_game->loc.y = GAME->sprite_game->loc.y - speed;
-        sfVector2f loco = { GAME->sprite_game->loc.x, GAME->sprite_game->loc.y };
-        sfSprite_setPosition(GAME->sprite_game->ski_character2, loco);
-    } else if (GAME->event.type == sfEvtKeyPressed && GAME->event.key.code == sfKeyDown) {
-        GAME->sprite_game->loc.y = GAME->sprite_game->loc.y + speed;
-        sfVector2f loco = { GAME->sprite_game->loc.x, GAME->sprite_game->loc.y };
-        sfSprite_setPosition(GAME->sprite_game->ski_character2, loco);
+        if (GAME->sprite_game->loc.y >= -100) {
+            GAME->sprite_game->loc.y = GAME->sprite_game->loc.y - speed;
+            sfVector2f loco = { GAME->sprite_game->loc.x, GAME->sprite_game->loc.y };
+            sfSprite_setPosition(GAME->sprite_game->ski_character2, loco);
+        }
+    }
+    if (GAME->event.type == sfEvtKeyPressed && GAME->event.key.code == sfKeyDown) {
+        if (GAME->sprite_game->loc.y <= 200) {
+            GAME->sprite_game->loc.y = GAME->sprite_game->loc.y + speed;
+            sfVector2f loco = { GAME->sprite_game->loc.x, GAME->sprite_game->loc.y };
+            sfSprite_setPosition(GAME->sprite_game->ski_character2, loco);
+        }
     }
     if (GAME->event.type == sfEvtKeyPressed && GAME->event.key.code == sfKeyLeft) {
         GAME->sprite_game->loc.x = GAME->sprite_game->loc.x - speed;
@@ -130,11 +147,9 @@ void move_skier_black(GAME_T *GAME)
 GAME_T *condition_window(GAME_T *GAME)
 {
     while (sfRenderWindow_pollEvent(GAME->window, &GAME->event)) {
-        if (GAME->event.type == sfEvtKeyPressed &&
-        GAME->event.key.code == sfKeyEscape) {
+        if (GAME->event.type == sfEvtKeyPressed && GAME->event.key.code == sfKeyEscape) {
             sfRenderWindow_close(GAME->window);
-        } else if (GAME->event.type == sfEvtKeyPressed &&
-        GAME->event.key.code == sfKeySpace) {
+        } else if (GAME->event.type == sfEvtKeyPressed && GAME->event.key.code == sfKeySpace) {
             glitch_effect(GAME->window);
             GAME->boo++;
         }
@@ -155,7 +170,8 @@ GAME_T *main_window(GAME_T *GAME_T)
         move_obstacle_white(GAME_T);
         move_obstacle_black(GAME_T);
         sfRenderWindow_display(GAME_T->window);
-        if_colision_white(GAME_T);
+        /*if_colision_white(GAME_T);
+        if_colision_black(GAME_T);*/
     }
     return (GAME_T);
 }

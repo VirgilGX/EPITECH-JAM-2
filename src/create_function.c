@@ -11,7 +11,7 @@ sfRenderWindow *create_window(int width, int height, char *str)
 {
     sfVideoMode mode = { width, height, BPP };
     sfRenderWindow *win = sfRenderWindow_create(mode, str,
-    sfFullscreen, NULL);
+    sfResize | sfClose , NULL);
     sfRenderWindow_setFramerateLimit(win, 60);
     return (win);
 }

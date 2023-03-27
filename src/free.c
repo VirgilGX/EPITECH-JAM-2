@@ -27,6 +27,10 @@ void free_sprite(SPRITE_T *SPRITE_T, OBS_T *OBS_T, OBS_2T *OBS_2T)
     sfRectangleShape_destroy(SPRITE_T->black_rect);
     sfRectangleShape_destroy(SPRITE_T->white_rect);
 
+    sfRectangleShape_destroy(SPRITE_T->life);
+    sfRectangleShape_destroy(SPRITE_T->life2);
+    sfRectangleShape_destroy(SPRITE_T->life3);
+
     free(OBS_T);
     free(OBS_2T);
     free(SPRITE_T);

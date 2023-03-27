@@ -9,11 +9,6 @@
 
 void sprite_static(GAME_T *GAME_T)
 {
-    sfRenderWindow_drawRectangleShape(GAME_T->window,
-    GAME_T->sprite_game->black_rect, NULL);
-    sfRenderWindow_drawRectangleShape(GAME_T->window,
-    GAME_T->sprite_game->white_rect, NULL);
-
     sfRenderWindow_drawSprite(GAME_T->window,
     GAME_T->obs->pierre, NULL);
     sfRenderWindow_drawSprite(GAME_T->window,
@@ -36,17 +31,14 @@ void sprite_static(GAME_T *GAME_T)
     GAME_T->obns->piece, NULL);
     sfRenderWindow_drawSprite(GAME_T->window,
     GAME_T->obns->illusion, NULL);
-
-    sfRenderWindow_drawRectangleShape(GAME_T->window,
-    GAME_T->sprite_game->life, NULL);
-    sfRenderWindow_drawRectangleShape(GAME_T->window,
-    GAME_T->sprite_game->life2, NULL);
-    sfRenderWindow_drawRectangleShape(GAME_T->window,
-    GAME_T->sprite_game->life3, NULL);
 }
 
 void draw_sprite(GAME_T *GAME_T)
 {
+    sfRenderWindow_drawRectangleShape(GAME_T->window,
+    GAME_T->sprite_game->black_rect, NULL);
+    sfRenderWindow_drawRectangleShape(GAME_T->window,
+    GAME_T->sprite_game->white_rect, NULL);
     sprite_static(GAME_T);
     if (GAME_T->boo % 2 == 0) {
         sfRenderWindow_drawSprite(GAME_T->window,

@@ -29,6 +29,7 @@
     #include <stdlib.h>
     #include <math.h>
     #include <time.h>
+    #include <unistd.h>
 
     /* Structure sprite */
     typedef struct SPRITE_T {
@@ -108,7 +109,9 @@ void movement_white(sfSprite *sprite, sfVector2f pos);
 void movement_black(sfSprite *sprite, sfVector2f pos);
 
 /* Colision */
-void if_colision_white(GAME_T *GAME);
+int if_colision_white(GAME_T *GAME_T);
+void if_colision_black(GAME_T *GAME_T);
+int colision_sprite(int vie, GAME_T *GAME);
 
 /* Menu */
 void menu(char **args);
